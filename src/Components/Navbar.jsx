@@ -5,8 +5,19 @@ import { NavLink } from "react-router";
 const Navbar = () => {
   const links = (
     <>
-      <li>
-        <NavLink>Services</NavLink>
+      <li className="font-bold">
+        <NavLink to="/services">Services</NavLink>
+      </li>
+      <li className="font-bold">
+        <NavLink to="/aboutUs">About Us</NavLink>
+      </li>
+      <li className="font-bold">
+        <NavLink
+          className={({ isActive }) => (isActive ? "text-primary" : "")}
+          to="/coverage"
+        >
+          Coverage
+        </NavLink>
       </li>
     </>
   );
