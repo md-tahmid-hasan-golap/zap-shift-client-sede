@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "./Logo";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
+import { AuthContext } from "../firebase/FirebaseAuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handelLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "Logged Out!",
+          text: "You have successfully logged out.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Logout Failed!",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "Try Again",
+        });
+      });
+  };
   const links = (
     <>
       <li className="font-bold">
@@ -55,8 +79,24 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="login" className="btn">
-          Login
+        {user ? (
+          <div className="navbar-end">
+            <button
+              onClick={handelLogout}
+              className="bg-red-500 text-white font-bold btn"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div>
+            <Link to="login" className="btn">
+              Login
+            </Link>
+          </div>
+        )}
+        <Link to="/" className="btn bg-[#CAEB66] mx-3 text-black">
+          Be a Rider
         </Link>
       </div>
     </div>
