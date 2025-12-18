@@ -5,6 +5,8 @@ import Coverage from "../Components/Coverage";
 import AuthLayouts from "../Layouts/AuthLayouts";
 import Login from "../Components/Login";
 import Registar from "../Components/Registar";
+import PrivateRouter from "./PrivateRouter";
+import Ridar from "../Components/Ridar";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
         path: "/coverage",
         loader: () => fetch("/ServiceCenter.json"),
         element: <Coverage></Coverage>,
+      },
+      {
+        path: "/ridar",
+        element: (
+          <PrivateRouter>
+            <Ridar></Ridar>
+          </PrivateRouter>
+        ),
       },
     ],
   },

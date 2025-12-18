@@ -95,7 +95,7 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        <Link to="/" className="btn bg-[#CAEB66] mx-3 text-black">
+        <Link to="/ridar" className="btn bg-[#CAEB66] mx-3 text-black">
           Be a Rider
         </Link>
       </div>
